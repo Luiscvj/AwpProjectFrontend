@@ -3,6 +3,25 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/main/VisualStudio.gitignore
 
+
+
+
+
+# Dependencies
+/node_modules
+
+# Build artifacts
+/dist
+/tmp
+
+
+
+
+
+# System files
+.DS_Store
+Thumbs.db
+
 # User-specific files
 *.rsuser
 *.suo
