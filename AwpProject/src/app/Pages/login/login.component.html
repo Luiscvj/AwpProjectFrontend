@@ -1,0 +1,98 @@
+
+
+<div class="container text-center " style="height: 100vh; width: 100%; max-width: none;">
+    <div class="row" style="height: 100vh;" >
+        <div class="col    justify-content-center" >
+                <img src="../../../assets/Images/AWPLOGO.png"  alt="AWP" width="250px" style="padding-top: 15%; " class="mb-3" id="AwpLogo">
+                <div id="carouselExampleDark" class="carousel carousel-dark slide ">
+                    <div class="carousel-indicators">
+                      <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active bg-light"  aria-current="true" aria-label="Slide 1"></button>
+                      <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1"   class=" bg-light" aria-label="Slide 2 "></button>
+                      <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2"  class=" bg-light" aria-label="Slide 3 "></button>
+                    </div>
+    
+                    <div class="carousel-inner ">
+                      <div class="carousel-item active justify-items-center " data-bs-interval="10000">
+                          <div class="card mb-3" style="width: 100%; background: transparent; border: none;">
+                              <div class="card-body text-center">
+                                <h2 class="card-tilte " style="color:#FFFF;">Building The Future</h2>
+                                <p class="card-text" style="color: #FFFF;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
+                              </div>
+                           </div> 
+                      </div>
+                      <div class="carousel-item" data-bs-interval="2000">
+                          <div class="card mb-3" style="width: 100%; background:transparent; border: none;">
+                             <div class="card-body">
+                                <h2 class="card-tilte" style="color: #FFFF;">Building The Future</h2>
+                                <p class="card-text" style="color: #FFFF;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
+                             </div>
+                          </div>
+                      </div>
+                      <div class="carousel-item">
+                        <div class="card mb-3" style="width: 100%; background:transparent; border: none;">
+                            <div class="card-body">
+                                <h2 class="card-tilte" style="color: #FFFF;">Building The Future</h2>
+                                <p class="card-text" style="color: #FFFF;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
+                            </div>
+                         </div> 
+                       </div>
+                    </div>
+                   
+                </div>
+        </div>
+    
+    
+    
+        <div  id="LoginForms"  class="col-5 " style="background-color: #FFFF; margin-right: 0;">
+            <div class="row  justify-content-start mt-2 mb-4">
+                <div class="col-md align-content-start">
+                    <p class="text-start mb-0">Welcome Back</p>
+                    <h4 class="text-start ">Log In to your account</h4>
+                </div>
+            </div>
+            <div class="row g-3 justify-content-center  " style="margin-top: 30%; margin-left: 30%;">       
+                <form [formGroup]="loginForm" class="align-items-center "> 
+                  <div class="col-8 col-sm-8 col-md-8 text-start">
+                     <mat-form-field>
+                        <mat-label>Email</mat-label>
+                        <input type="email" matInput formControlName="email" [errorStateMatcher]="matcher"
+                            placeholder="email@example.ex"> 
+                                @if (this.loginForm.controls['email'].hasError('email') && !this.loginForm.controls['email'].hasError('required')) {
+                                    <mat-error>Please enter a valid email address</mat-error>
+                                  }
+                                @if(this.loginForm.controls['email'].hasError('required')){
+                                    <mat-error>Email is <strong>required</strong></mat-error>
+                                  }   
+                     </mat-form-field>
+                  </div>   
+                  <div class="col-8 col-sm-8 col-md-8  text-start">
+                    <mat-form-field>
+                        <mat-label>Password</mat-label>
+                        <input type="password" matInput formControlName="password" [errorStateMatcher]="matcher">
+                        @if(this.loginForm.controls['password'].hasError('required')){
+                            <mat-error>Password is <strong>required</strong></mat-error>
+                        }
+                    </mat-form-field>
+                  </div>
+                  <div class="row pt-2 justify-content-center ">
+                      <div class="col-5 text-start">
+                        <div class="form-chek">
+                            <input class="form-check-input" type="checkbox" name="RemenberMe" id="remeber">
+                            <label class="form-chek-label" for="remeber" style="font-size: 12px;font-family: Poppins,sans-serif; font-weight: 500;">Remeber me</label>
+                        </div>
+                      </div>
+                      <div class="col-7 text-start">
+                        <a href=""  style="font-size: 12px;font-family: Poppins, sans-serif; font-weight: 500;text-decoration: none; color: black;">Forgot Password?</a>
+                      </div>
+                  </div>
+                  <div class="row mt-3 me-sm-1 me-md-4   me-lg-5 pe-2 text-start">
+                    <div class=" col-10  ms-0" >
+                        <button style="width: 100%;"  class="btn btn-dark" mat-button (click)="  login()">Continue</button>
+                    </div>
+                  </div>
+                </form>                                   
+            </div>
+        </div>
+    </div>
+    
+    </div>
