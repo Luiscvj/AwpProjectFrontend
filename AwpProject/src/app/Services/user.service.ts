@@ -15,7 +15,7 @@ export class UserService {
 
   loginUser(model: LoginUserDto) : Observable<any>
   {
-    return  this.http.post<any>(`${this.apiUrl}/LoginUser`, model);
+    return  this.http.post<any>(`${this.apiUrl}/LoginUser`, model,{withCredentials: true});
   };
   registerUser(model: RegisterDto) : Observable<any>
   {
