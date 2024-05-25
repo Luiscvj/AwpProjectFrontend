@@ -1,0 +1,40 @@
+body
+{
+    background: linear-gradient(to top right ,#054653,#AFAFAF);
+    margin: 0;
+}
+
+.registerContainer
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.disabledButton
+{
+    background-color: rgb(184, 184, 184);
+    color: rgb(68, 67, 67) !important;
+    width: 30%;
+    
+}
+
+.enabledButton{
+    background-color: black;
+    color: white  !important;
+    width: 30%;
+}
+.registerContainer{
+    max-width: 600px;
+
+}
+
+button[disabled] {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+
+
+

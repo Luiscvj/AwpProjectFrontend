@@ -1,0 +1,15 @@
+.material-symbols-outlined {
+    font-variation-settings:
+    'FILL' 1,
+    'wght' 4600,
+    'GRAD' 2,
+    'opsz' 24
+  }
+  
+  
+  
+  .image-container-user img{
+      position: absolute;
+      left: 15px;
+      width: 50px;
+  }

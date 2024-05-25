@@ -1,5 +1,8 @@
 import { Injectable } from "@angular/core";
 import { jwtDecode } from "jwt-decode";
+import { UserDto } from "../Models/UserDTOS/UserDto";
+import { CustomJwtPayload } from "./CustomJwtPayload";
+import { RolDto } from "../Models/RolDTOS/RolDto";
 @Injectable({
     providedIn: 'root'
   })
@@ -13,7 +16,6 @@ export class JwtDecode
         for(let i = 0; i < cookieArr.length; i++)
             {
                 let cookiePair = cookieArr[i].split("=");
-                console.log(cookiePair);
                 if(cookieName === cookiePair[0].trim())
                     {
                         return decodeURIComponent(cookiePair[1]);
@@ -22,20 +24,41 @@ export class JwtDecode
             return "can't decode de cookie";
     }
 
-    decode(token:string)
+    decode(token:string) : CustomJwtPayload | null
     {
         
         try
         {
-
-            const decodeToken = jwtDecode(token);
-            return decodeToken;
+            return   jwtDecode<CustomJwtPayload>(token);//Allow to personalize my token payload
+            
         }catch(error)
         {
             console.log(error);
         }
-        return "can't decode";
+        return null;
     }
 
-   
+
+    async getUserClaims(token: string): Promise<any>{
+        const decodeToken = await this.decode(token);
+        let roles: RolDto[]= [];
+       
+    
+        if(decodeToken && decodeToken['roles']){
+            const rolesClaims = decodeToken['roles'];           
+            if(Array.isArray(rolesClaims)){
+                roles = rolesClaims.map(role => role);              
+            }else{
+                roles.push(new RolDto(rolesClaims));//If is a string, i just add to the array.            
+            }
+            let userDto = new  UserDto(
+                decodeToken.uid,
+                decodeToken.sub,
+                decodeToken.email,
+                roles
+            )
+            return userDto;
+        }
+        return null;   
+   }
 }

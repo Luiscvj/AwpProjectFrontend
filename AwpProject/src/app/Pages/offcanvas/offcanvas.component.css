@@ -1,0 +1,30 @@
+
+.image-container img{
+    position: absolute;
+    left: 20px;
+    top: 5px;
+    width: 150px;
+}
+
+.offCanvasBtns{
+    width: 100%;
+    height: 80px;
+    text-align: left;
+    display: flex;
+    justify-content:flex-start;
+    
+   
+ 
+}
+
+#offcanvasAwp{
+    width: 250px;
+}
+.user-image-off{
+    width: 60px;
+    left:50px;
+    top: 40px;
+
+}
+
+

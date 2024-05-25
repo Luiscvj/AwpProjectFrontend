@@ -1,1 +1,66 @@
-<p>register works!</p>
+<div class="  container-md text-center registerContainer">  
+        <div class="card md-4 xl-1 sm-1 w-75 mx-auto ">
+            <div class="card-title pt-3 mb-0">
+              
+                <h2>Sing Up</h2>
+            </div>
+           <div class="card-body  pt-2" > 
+            <hr> 
+            <form [formGroup]="registerForm">
+                <div class="row align-items-center" >
+                    <div class="col-12 p-0 ">
+                        <mat-form-field [style]="{'width':'68%'}">
+                            <mat-label>Username</mat-label>
+                            <input type="text" matInput formControlName="userName" [errorStateMatcher]="matcher">
+                            @if(this.registerForm.controls['userName'].hasError('required')){
+                                <mat-error>Username is required</mat-error>
+                            }
+                            @if(this.registerForm.controls['userName'].hasError('userNameInUse')  ){
+
+                                <mat-error>Username <strong> already in use </strong> </mat-error>
+                            }
+                        </mat-form-field>
+                    </div>
+           
+                    <div class="col-12 p-0">
+                       <mat-form-field appearance="fill" [style]="{'width':'68%'}">
+                        <mat-label>Email</mat-label>
+                        <input matInput formControlName="email" [errorStateMatcher]="matcher">
+                        @if(this.registerForm.controls["email"].hasError('email') && !this.registerForm.controls['email'].hasError('required')){
+                            <mat-error>Please enter a valid email address</mat-error>
+                        }
+                        @if(this.registerForm.controls["email"].hasError('required')){
+                            <mat-error>Email is <strong>required</strong></mat-error>
+                        
+                        }
+                        @if(this.registerForm.controls['email'].hasError('userExists')){
+                            <mat-error>Email<strong> already in use</strong></mat-error>
+                        }
+                       
+                       </mat-form-field> 
+                    </div>
+                    <div class="col-12 mb-4 p-0 ">
+                        <mat-form-field appearance="fill" [style]="{'width':'68%'}">
+                            <mat-label>Password</mat-label>
+                            <input matInput [type]="hide? 'password': 'text'" formControlName="password" [errorStateMatcher]="matcher">
+                            <button mat-icon-button matSuffix (click)="hide=!hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            </button>
+                            @if(this.registerForm.controls['password'].hasError('strongPassword')){
+                                <mat-error>Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter,
+                                    one number, and one special character.</mat-error>
+                                   
+                            }
+                            @if(this.registerForm.controls['password'].hasError('required') ){
+                                <mat-error>Password is <strong>required</strong></mat-error>
+                            }
+                        </mat-form-field>
+                    </div>
+                </div>  
+                <button mat-stroked-button  (click)="signUp()" [disabled]="registerForm.invalid" id="registerButton" type="submit" [ngClass]="registerForm.invalid ? 'disabledButton' : 'enabledButton'">Sign in</button>
+            </form>
+                    
+           </div> 
+    </div>
+</div>
+
