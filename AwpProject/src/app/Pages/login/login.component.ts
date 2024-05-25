@@ -1,7 +1,8 @@
-import { Component, OnDestroy, OnInit, Renderer2, inject} from '@angular/core';
+import { Component, NgModule, OnDestroy, OnInit, Renderer2, inject} from '@angular/core';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import { MyErrorStateMatcher } from '../../MyErrorStateMatcher';
+import {MatIconModule} from '@angular/material/icon';
+import {MyErrorStateMatcher } from '../../Helpers/MyErrorStateMatcher';
 import {
   FormControl,
   Validators,
@@ -13,6 +14,11 @@ import {
 import { Router } from '@angular/router';
 import { LoginUserDto } from '../../Models/UserDTOS/LoginUserDto';
 import { UserService } from '../../Services/user.service';
+import { JwtDecode } from '../../Helpers/JwtDecode';
+import {MatButtonModule} from '@angular/material/button';
+import { AuthService } from '../../Services/auth.service';
+import { UserDto } from '../../Models/UserDTOS/UserDto';
+
 
 
 
@@ -23,15 +29,22 @@ import { UserService } from '../../Services/user.service';
     MatInputModule,
     MatFormFieldModule,
     ReactiveFormsModule,
-    FormsModule],
+    FormsModule,MatButtonModule,
+    MatIconModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
+
+
+
+
 export class LoginComponent implements OnInit,OnDestroy{
   public formBuild = inject(FormBuilder);
-  public apiUserService  = inject(UserService);
+  public _apiUserService  = inject(UserService);
+  public _jwtDecode = inject(JwtDecode);
+  hide = true;
   
-  constructor(private renderer: Renderer2, private router: Router){}
+  constructor(private renderer: Renderer2, private router: Router, private authService: AuthService){}
 
 
   public loginForm:FormGroup =  this.formBuild.group(
@@ -40,7 +53,7 @@ export class LoginComponent implements OnInit,OnDestroy{
       password: new FormControl('',[Validators.required])
     });
 
-    matcher = new MyErrorStateMatcher();
+  matcher = new MyErrorStateMatcher();
     
     
   ngOnInit(): void {
@@ -51,30 +64,45 @@ export class LoginComponent implements OnInit,OnDestroy{
     this.renderer.removeClass(document.body, 'custom-body-style');
   }
 
-  login()
+   login()
   {
-    const loginUserData:LoginUserDto =
-    {
-      email: this.loginForm.value.email,
-      password: this.loginForm.value.password
-    }
-    console.log(new Date().toString());
-    this.apiUserService.loginUser(loginUserData).subscribe(
-      {
-        next:(data)=>
+
+    const loginUserData = new LoginUserDto(
+      this.loginForm.value.email,
+      this.loginForm.value.password
+    );  
+    
+    this._apiUserService.loginUser(loginUserData).subscribe(
+      {      
+        next:async (data)=>
           {
-            console.log(data);
             if(data.statusCode === 200)
               {
-                this.router.navigate(['/register']);
+                 
+                let token = this._jwtDecode.getCookie('token');
+            
+                let userData = await  this._jwtDecode.getUserClaims(token);
+                
+                let isUserSet = await  this.authService.setUserInfo(userData);  
+        
+           
+               
+
+                this.router.navigate(['/home']);
+              
               }
-            else
-            {
-              console.log("No se pudo loguear:  " + data.statusCode);
-            }
+              else
+              {
+                alert( data.message);
+              }
           }
       })
 
+  }
+
+  toRegister()
+  {
+    this.router.navigate(['/register'])
   }
 
 

@@ -40,9 +40,7 @@
                    
                 </div>
         </div>
-    
-    
-    
+
         <div  id="LoginForms"  class="col-5 " style="background-color: #FFFF; margin-right: 0;">
             <div class="row  justify-content-start mt-2 mb-4">
                 <div class="col-md align-content-start">
@@ -50,12 +48,12 @@
                     <h4 class="text-start ">Log In to your account</h4>
                 </div>
             </div>
-            <div class="row g-3 justify-content-center  " style="margin-top: 30%; margin-left: 30%;">       
+            <div class="row g-3 p-2 justify-content-center  " style="margin-top: 30%; margin-left: 30%;">       
                 <form [formGroup]="loginForm" class="align-items-center "> 
-                  <div class="col-8 col-sm-8 col-md-8 text-start">
-                     <mat-form-field>
-                        <mat-label>Email</mat-label>
-                        <input type="email" matInput formControlName="email" [errorStateMatcher]="matcher"
+                  <div class="col-8 col-sm-8 col-md-8 text-start ">
+                     <mat-form-field [style]="{'width':'100%'}">
+                        <mat-label >Email</mat-label>
+                        <input   type="email" matInput formControlName="email" [errorStateMatcher]="matcher"
                             placeholder="email@example.ex"> 
                                 @if (this.loginForm.controls['email'].hasError('email') && !this.loginForm.controls['email'].hasError('required')) {
                                     <mat-error>Please enter a valid email address</mat-error>
@@ -66,9 +64,12 @@
                      </mat-form-field>
                   </div>   
                   <div class="col-8 col-sm-8 col-md-8  text-start">
-                    <mat-form-field>
+                    <mat-form-field [style]="{'width':'100%'}">
                         <mat-label>Password</mat-label>
-                        <input type="password" matInput formControlName="password" [errorStateMatcher]="matcher">
+                        <input  matInput [type]="hide? 'password':'text'"  formControlName="password" [errorStateMatcher]="matcher">
+                        <button mat-icon-button matSuffix (click)="hide=!hide"[attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                          <mat-icon>{{hide ?'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
                         @if(this.loginForm.controls['password'].hasError('required')){
                             <mat-error>Password is <strong>required</strong></mat-error>
                         }
@@ -87,10 +88,19 @@
                   </div>
                   <div class="row mt-3 me-sm-1 me-md-4   me-lg-5 pe-2 text-start">
                     <div class=" col-10  ms-0" >
-                        <button style="width: 100%;"  class="btn btn-dark" mat-button (click)="  login()">Continue</button>
+                        <button style="width: 100%;"  class="btn btnToHome" [style]="{'background-color': 'black', 'color':'white'}"  mat-raised-button  (click)="login()">Continue</button>
                     </div>
                   </div>
+                
                 </form>                                   
+            </div>
+            
+            <div class="container text-center mt-4">
+              <div class="row   me-sm-1 me-md-4 ">
+                <div class="col align-self-center">
+                  <a mat-stroked-button (click)="toRegister()" style="font-size: 12px;font-family: Poppins, sans-serif; font-weight: 500;text-decoration: none; color: rgb(0, 0, 0); margin-left: 5.5rem;">Or Sing Up</a>
+                </div>
+              </div>
             </div>
         </div>
     </div>
