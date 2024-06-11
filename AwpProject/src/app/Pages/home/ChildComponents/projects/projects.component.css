@@ -1,0 +1,41 @@
+.material-symbols-outlined {
+    font-variation-settings:
+    'FILL' 0,
+    'wght' 4600,
+    'GRAD' 2,
+    'opsz' 24
+  }
+
+.matIconAddProjects {
+    width: 2rem !important;
+    height: 1.5rem !important;
+    background-color: #0d778c;
+    border-radius: 10px;
+    
+    
+}
+
+.cardProjects
+{
+  min-width: 500px;
+  margin-right: 10px;
+  width: 100%;
+}
+
+.configProjectButton
+{
+  position: absolute;
+  top: 10px;  /* Ajusta según necesidad para el margen superior */
+  left: 215px;
+  background-color: transparent;
+  color:#0d778c;
+  width: 30px;
+  border: none;
+  transition: background-color 0.3s, color 0.3s; 
+
+}
+
+.configProjectButton:hover {
+  background-color: #f0f0f0; /* Color de fondo al hacer hover */
+  color: #0f0f10; /* Cambia el color del ícono/texto al hacer hover */
+}

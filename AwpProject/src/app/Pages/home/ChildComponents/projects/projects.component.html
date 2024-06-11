@@ -1,0 +1,35 @@
+<div class="card cardProjects">
+    <div class="card-header">
+      <button mat-raised-button class="text-center" (click)="openProjectDialog()"> Add Project 
+        <mat-icon aria-hidden="false" aria-label="add-project" class="matIconAddProjects">
+            <span class="material-symbols-outlined">add_circle</span>
+        </mat-icon>
+      </button>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        @for (project of projectList; track $index) 
+        {
+          
+            <div class="col-sm-6 mt-2 " style="max-width: 300px; ">
+              <div class="card" style="height: 170px; position: relative;">
+                <button  class="configProjectButton btn" [matMenuTriggerFor]="menu">
+                  <span class="material-symbols-outlined"  style="display: flex;justify-content: center;">more_vert</span>
+                </button>
+                <mat-menu #menu="matMenu">
+                  <button mat-menu-item (click)="openEditProjectDialog(project)">Edit Project</button>
+                  <button mat-menu-item (click)="DeleteProject(project.projectId)"   style="color: red;">Delete project</button>
+                </mat-menu>
+                <div class="card-body">
+                  <h5 class="card-title">{{project.projectCode}}</h5>
+                  <p class="card-text">Proyecto</p>
+                  <button mat-raised-button color="primary" (click)="goToOverallProject(project.projectId)">Overall</button>
+                </div>
+              </div>
+            </div>         
+        }
+      </div>
+
+
+    </div>
+  </div>

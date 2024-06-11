@@ -4,23 +4,41 @@
 <div class="grid-container">
   <!-- //////////////////////////////////////////////////////////////////////// deader -->
   <div class="header" >
+   
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">
           <div class="image-container">
               <img src="../../../assets/Images/AWPLOGO-removebg.png" id="imgAwpLogo">
           </div>
-        </a>        
+        </a>
+        @if(project.projectId > 0)
+        {
+          <div class="dropdown dropDownProject">
+              <button [matMenuTriggerFor]="menu" class="btn    dropdown-toggle  menuProject" >       
+              {{project.projectCode}}
+              </button>
+              <mat-menu  #menu="matMenu" class="matMenuPanel">
+                <button mat-menu-item>Workers</button> 
+              </mat-menu>              
+          </div>
+        }           
       </div>
     </nav>
-  </div>
+  </div> 
+
+  
   <!-- //////////////////////////////////////////////////////////////////////// sidebar -->
   <div class="sidebar">
     <app-sidebar></app-sidebar>
 
   </div>
     <!-- //////////////////////////////////////////////////////////////////////// mainContent -->
- <div class="content"></div>
+ <div class="content">
+<!--   <app-projects [userData]="userData" class="soyAppProyecto"></app-projects> -->
+    <router-outlet></router-outlet>
+ 
+ 
   
 </div>
 
