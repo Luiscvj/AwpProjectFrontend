@@ -41,6 +41,7 @@ export class JwtDecode
 
     async getUserClaims(token: string): Promise<any>{
         const decodeToken = await this.decode(token);
+       console.log(decodeToken);
         let roles: RolDto[]= [];
        
     
@@ -53,7 +54,7 @@ export class JwtDecode
             }
             let userDto = new  UserDto(
                 decodeToken.uid,
-                decodeToken.sub,
+                decodeToken.username,
                 decodeToken.email,
                 roles
             )
