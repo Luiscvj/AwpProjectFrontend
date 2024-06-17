@@ -26,3 +26,9 @@
 {
     background-color: #17a2b8;
 }
+
+.containerCard
+{
+    overflow-y: auto;
+    max-height: 500px;
+}

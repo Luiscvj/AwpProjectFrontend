@@ -22,6 +22,7 @@ import { DisciplineDto } from '../../../../Models/DisciplineDTOS/DisciplineDto';
 import { CreditRuleService } from '../../../../Services/CreditRule/credit-rule.service';
 import { DisciplineService } from '../../../../Services/Discipline/discipline.service';
 import { Observable, map, switchMap } from 'rxjs';
+import { EditCreditRuleComponent } from '../../../Dialogs/CreditRuleDialogs/edit-credit-rule/edit-credit-rule.component';
 @Component({
   selector: 'app-credit-rules',
   standalone: true,
@@ -94,6 +95,17 @@ export class CreditRulesComponent implements OnInit {
                       if(result.statusCode === 201)
                         {
                           alert(result.message);
+                          this.getCreditRuleByDiscipline().subscribe(
+                            {
+                              next:(data)=>
+                                {
+                                  if(data)
+                                    {
+                                      this.groupCreditRuleByDiscipline = data;
+                                      this.cdr.detectChanges();
+                                    }
+                                }
+                            })
                         }
                     }
                 })
@@ -147,7 +159,17 @@ export class CreditRulesComponent implements OnInit {
             if(result.statusCode === 204)
               {
                 alert(`${result.message}`);
-                this.getCreditRuleByDiscipline();
+                this.getCreditRuleByDiscipline().subscribe(
+                  {
+                    next:(data)=>
+                      {
+                        if(data)
+                          {
+                            this.groupCreditRuleByDiscipline = data;
+                            this.cdr.detectChanges();
+                          }
+                      }
+                  })
               }else
               {
                 alert(`${result.message}`);
@@ -156,6 +178,51 @@ export class CreditRulesComponent implements OnInit {
 
           }
       })
+  }
+
+  editCreditRuleDialog(creditRuleToEdit: CreditRuleDto): void
+  {
+    const dialogRef = this.dialog.open(EditCreditRuleComponent,
+      {
+        data:{creditRuleId:creditRuleToEdit.creditRuleId, disciplineId: creditRuleToEdit.disciplineId, ruleName: creditRuleToEdit.ruleName,projectId: this.projectId}
+      });
+      dialogRef.afterClosed().subscribe(
+        {
+          next:(data:CreditRuleDto)=>
+            {
+              if(data)
+                {
+                  this._creditRuleService.UpdateCreditRule(data).subscribe(
+                    {
+                      next:(data)=>
+                        {
+                          if(data.statusCode === 204)
+                            {
+
+                              alert(`${data.message}`);
+                              this.getCreditRuleByDiscipline().subscribe(
+                                {
+                                  next:(data)=>
+                                    {
+                                      if(data)
+                                        {
+                                          this.groupCreditRuleByDiscipline = data;
+                                          this.cdr.detectChanges();
+                                        }
+                                    }
+                                })
+                            }else
+                            {
+                              alert(`${data.message}`);
+                            }
+
+                        }
+                    })
+                }
+            }
+        })
+
+
   }
 
 }

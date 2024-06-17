@@ -14,7 +14,7 @@ export class CreditRuleService {
 
   PostCreditRule(model: CreditRuleDto): Observable<any>
   {
-      return this.http.post<any>(`${this.apiUrl}`,model)
+      return this.http.post<any>(this.apiUrl,model);
   }
 
   GetListCreditRules():Observable<CreditRuleDto[]>
@@ -33,5 +33,10 @@ export class CreditRuleService {
     const params = new HttpParams().set('creditRuleId', creditRuleId);
     return this.http.delete<any>(`${this.apiUrl}`,{params});
   }
+  UpdateCreditRule(creditRule: CreditRuleDto): Observable<any>
+  {
+    return this.http.put<CreditRuleDto>(this.apiUrl,creditRule);
+  }
+
   
 }

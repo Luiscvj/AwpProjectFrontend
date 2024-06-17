@@ -16,10 +16,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { CreditRuleDto } from '../../../../Models/CreditRuleDTOS/CreditRuleDto';
-import { DisciplineDto } from '../../../../Models/DisciplineDTOS/DisciplineDto';
 import { DisciplineService } from '../../../../Services/Discipline/discipline.service';
+import { DisciplineDto } from '../../../../Models/DisciplineDTOS/DisciplineDto';
+
 @Component({
-  selector: 'app-add-credit-rule',
+  selector: 'app-edit-credit-rule',
   standalone: true,
   imports: 
   [
@@ -33,30 +34,30 @@ import { DisciplineService } from '../../../../Services/Discipline/discipline.se
     MatDialogClose,
     MatSelectModule
   ],
-  templateUrl: './add-credit-rule.component.html',
-  styleUrl: './add-credit-rule.component.css'
+  templateUrl: './edit-credit-rule.component.html',
+  styleUrl: './edit-credit-rule.component.css'
 })
-export class AddCreditRuleComponent implements OnInit {
+export class EditCreditRuleComponent implements OnInit{
   disciplines: DisciplineDto[] = [];
-  disciplineData: DisciplineDto = new DisciplineDto();
+
   constructor
   (
-    public dialogRef: MatDialogRef<AddCreditRuleComponent>,
-    @Inject(MAT_DIALOG_DATA) public creditRule :CreditRuleDto,
-    public  disciplineService: DisciplineService
-  )
-  {}
+    public dialogRef: MatDialogRef<EditCreditRuleComponent>,
+    @Inject(MAT_DIALOG_DATA) public creditRule: CreditRuleDto,
+    public _disciplineService: DisciplineService
+  ){}
+
   ngOnInit(): void {
     try
     {
-      this.disciplineService.GetListDiscipline().subscribe(
+      this._disciplineService.GetListDiscipline().subscribe(
         {
-          next:(disciplines:DisciplineDto[])=>
+          next:(_disciplines:DisciplineDto[])=>
             {
-              if(disciplines.length > 0)
+              if(_disciplines.length > 0)
                 {
-                  this.disciplines = disciplines;
-                  console.log(disciplines);
+                  this.disciplines = _disciplines;
+
                 }
             }
         })
@@ -64,13 +65,12 @@ export class AddCreditRuleComponent implements OnInit {
     {
       console.log(error);
     }
-   
   }
 
-
-
-  onNoClick()
+  onNoClick():void
   {
     this.dialogRef.close();
   }
 }
+
+

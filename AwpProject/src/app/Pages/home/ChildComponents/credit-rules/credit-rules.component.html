@@ -1,9 +1,23 @@
 
-<div class="card cardCreditRules">
+<div class="card cardCreditRules" >
     <div class="card-header">  
-      <h4>Credit Rules</h4>
+      <div class="row">
+        <div class="col-8">
+          <h4>Credit Rules</h4>
+        </div>
+        <div class="col-4">
+          <button mat-raised-button class="text-center"  (click)="openAddCreditRuleDialog()"> Add credit rule
+            <mat-icon aria-hidden="false" aria-label="add-project" class="matIconAddCreditRules">
+                <span class="material-symbols-outlined">add_circle</span>
+            </mat-icon>
+          </button>
+        </div>
+      </div>
+
+
     </div>
-    <div class="card-body">
+    
+    <div class="card-body containerCard">
       <div class="row">
      
         @for (disciplineName of getDisciplinesKeys(); track $index) 
@@ -22,7 +36,7 @@
                   <h6>{{creditRule.ruleName}}</h6>
                 </div>
                 <div class="col-6 text-center buttonSection" >
-                  <button mat-raised-button  class="editCreditRuleButton">
+                  <button mat-raised-button (click)="editCreditRuleDialog(creditRule)" class="editCreditRuleButton">
                     Edit
                     <mat-icon>edit</mat-icon>
                   </button>    
@@ -51,11 +65,7 @@
 
 <!-- ////////////////////////////// -->
 
-      <button mat-raised-button class="text-center"  (click)="openAddCreditRuleDialog()"> Add credit rule
-        <mat-icon aria-hidden="false" aria-label="add-project" class="matIconAddCreditRules">
-            <span class="material-symbols-outlined">add_circle</span>
-        </mat-icon>
-      </button>
+      
 
     </div>
 </div>
