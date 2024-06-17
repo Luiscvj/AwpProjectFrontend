@@ -8,14 +8,16 @@
     <div class="offcanvas-body p-0">
       <div class="row justify-content-start ">
           <div class="col-12 mt-4">
-            <button mat-button  class="offCanvasBtns border-bottom"> <p class="barlow-medium">Projects</p> </button>
+            <button mat-button  class="offCanvasBtns border-bottom" (click)="goToPath('/home/projects')" > <p class="barlow-medium">Projects</p> </button>
           </div>
-          <div class="col-12">
-            <button mat-button  class="offCanvasBtns border-bottom" > <p class="barlow-medium">Work Breakdown Structure </p></button>
-          </div>
-          <div class="col-12">
-            <button mat-button  class="offCanvasBtns border-bottom" > <p class="barlow-medium">Credit Rules </p></button>
-          </div>
+        
+          @for (button of buttons; track $index)
+          {
+            <div class="col-12">
+              <button mat-button  class="offCanvasBtns border-bottom"  (click)="goToPath(button.link)"><p class="barlow-medium">{{button.name}}</p></button>
+            </div>
+          }
+         
           <div class="col-12">
             <button mat-button  class="offCanvasBtns border-bottom" > <p class="barlow-medium">Schedule </p></button>
           </div>
@@ -24,7 +26,7 @@
           </div>
       </div> 
       
-      <div class="row justify-content-center align-items-center" style="height: 20vh;">
+      <div class="row justify-content-center align-items-center" style="height: 150px; position: absolute; bottom: 0; width: 100%;">
           
            <div class="col-4 border-end">
               <img src="../../../assets/Images/User_Image.png" class="user-image-off" alt="">

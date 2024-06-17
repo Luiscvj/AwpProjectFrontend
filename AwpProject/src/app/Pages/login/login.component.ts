@@ -13,10 +13,10 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginUserDto } from '../../Models/UserDTOS/LoginUserDto';
-import { UserService } from '../../Services/user.service';
+import { UserService } from '../../Services/User/user.service';
 import { JwtDecode } from '../../Helpers/JwtDecode';
 import {MatButtonModule} from '@angular/material/button';
-import { AuthService } from '../../Services/auth.service';
+import { AuthService } from '../../Services/User/auth.service';
 import { UserDto } from '../../Models/UserDTOS/UserDto';
 
 
@@ -80,15 +80,20 @@ export class LoginComponent implements OnInit,OnDestroy{
               {
                  
                 let token = this._jwtDecode.getCookie('token');
-            
-                let userData = await  this._jwtDecode.getUserClaims(token);
-                
-                let isUserSet = await  this.authService.setUserInfo(userData);  
-        
-           
-               
+                if(token)
+                  {
+                    this.authService.setToken(token);
+                  
+                    let userData = await  this._jwtDecode.getUserClaims(token);
+                    
+                    let isUserSet = await  this.authService.setUserInfo(userData);
+                    if(isUserSet)
+                      {
 
-                this.router.navigate(['/home']);
+                        this.router.navigate(['/home']);
+                      }
+                  }
+                  
               
               }
               else

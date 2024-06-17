@@ -12,7 +12,7 @@ import {
   ReactiveFormsModule,
   FormGroup,
   FormBuilder,} from '@angular/forms'
-import { UserService } from '../../Services/user.service';
+import { UserService } from '../../Services/User/user.service';
 import { MyErrorStateMatcher } from '../../Helpers/MyErrorStateMatcher';
 import { CustomValidators } from '../../Helpers/CustomValidators';
 import { RegisterDto } from '../../Models/UserDTOS/RegisterDto';

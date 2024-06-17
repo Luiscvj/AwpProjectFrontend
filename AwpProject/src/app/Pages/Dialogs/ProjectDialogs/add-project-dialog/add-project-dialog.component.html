@@ -1,0 +1,16 @@
+<h2 mat-dialog-title>Add a new Project</h2>
+<mat-dialog-content class="dialogAddProject">
+   
+    <mat-form-field > 
+        <mat-label>Project name</mat-label>
+        <input type="text" matInput [(ngModel)]="projectData.projectCode" placeholder="Project-293cf23">
+    </mat-form-field>        
+    <mat-form-field>
+        <mat-label>Project value</mat-label>
+        <input type="number" matInput placeholder="$0.00" [(ngModel)]="projectData.projectValue">
+    </mat-form-field>     
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-raised-button  (click)="onNoClick()"  [style]="{'margin-right':'5px'}">Cancel</button>
+    <button  mat-raised-button color="warm" [mat-dialog-close]="projectData" [style]="{'background-color':'#17a2b8','color':'white', 'margin-right':'1.7rem'}">Create Project</button>
+</mat-dialog-actions>

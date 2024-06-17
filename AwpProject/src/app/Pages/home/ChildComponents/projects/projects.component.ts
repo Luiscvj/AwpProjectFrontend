@@ -12,7 +12,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { AddProjectDialogComponent } from '../../../Dialogs/ProjectDialogs/add-project-dialog/add-project-dialog.component';
 import { ProjectDto } from '../../../../Models/ProjectDTOS/ProjectDto';
-import { AuthService } from '../../../../Services/auth.service';
+import { AuthService } from '../../../../Services/User/auth.service';
 import { UserDto } from '../../../../Models/UserDTOS/UserDto';
 import { Router } from '@angular/router';
 import { HomeHeaderProjectService } from '../../../../Services/Shared/HomeHeaderProject/home-header-project.service';

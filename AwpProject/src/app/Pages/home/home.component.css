@@ -21,7 +21,7 @@
       'header header header'
       'sidebar content content';
       
-    grid-template-columns: 80px 2fr;
+    grid-template-columns: 80px minmax(600px,2fr);
     grid-template-rows: auto 1fr auto;
     gap:2px; /* Espacio entre los elementos del grid */
     height: 100vh; /* Altura total de la vista */
@@ -29,6 +29,7 @@
 .header {
     grid-area: header;
     text-align: center;
+    min-width: 600px;
   }
   
   .sidebar {
@@ -42,7 +43,44 @@
     background-color: #028fbe;
     padding: 20px;
   }
+  .menuProject {
+    display: flex;          /* Establece el modelo de caja flexible */
+    justify-content: space-between; /* Espacia los elementos uniformemente */
+    align-items: center;    /* Alinea los elementos verticalmente en el centro */
+    width: 400px;  
+    padding-top: 5px;
+    padding-right: 18px;    /* Asegúrate de tener algún relleno a la derecha */
+    height: 100%;
+    border-radius: 10px;
+}
+
+.dropDownProject
+{
+  position:absolute;
+  left: 20%;
+  border-radius: 8px;
+  box-shadow: 0 5px 8px rgb(0,0,0,0.2);
   
+
+}
+
+::ng-deep .cdk-overlay-pane .matMenuPanel {
+  min-width: 400px;
+}
+
+/* 
+cdk-overlay-pane Its use to refer all the floa components like dropdowns, menus, etc.
+*/
+.arrowMenu
+{
+  display: flex;
+  justify-content: end;
+  
+}
+
+
+
+
  /*  .footer {
     grid-area: footer;
     background-color: #276db3;

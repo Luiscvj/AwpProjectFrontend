@@ -1,0 +1,28 @@
+.cardCreditRules
+{
+    min-width: 500px;
+    margin-right: 10px;
+    width: 100%;
+}
+.matIconAddCreditRules
+{
+    width: 2rem !important;
+    height: 1.5rem !important;
+    background-color: #0d778c;
+    border-radius: 10px;
+}
+
+.cardCreditRuleByDiscipline
+{
+    background-color: #d9d9d9;
+}
+.buttonSection button
+{
+    width: 100px;
+    margin-right: 5px;
+}
+
+.editCreditRuleButton
+{
+    background-color: #17a2b8;
+}

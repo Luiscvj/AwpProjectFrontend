@@ -1,0 +1,22 @@
+<h2 mat-dialog-title>Add a new Credit rule</h2>
+<mat-dialog-content class="dialogAddProject">
+    <mat-form-field > 
+        <mat-label>Rule name</mat-label>
+        <input type="text" maxlength="100" matInput [(ngModel)]="creditRule.ruleName" >
+    </mat-form-field> 
+
+    <mat-form-field>
+        <mat-label>Disciplines</mat-label>
+        <mat-select  [(ngModel)]="creditRule.disciplineId">
+            <mat-option>None</mat-option>
+            @for (discipline of disciplines; track $index) 
+            {
+                <mat-option [value]="discipline.disciplineId">{{discipline.disciplineName}}</mat-option>
+            }
+        </mat-select>
+    </mat-form-field> 
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-raised-button  (click)="onNoClick()"  [style]="{'margin-right':'5px'}">Cancel</button>
+    <button  mat-raised-button color="warm" [mat-dialog-close]="creditRule" [style]="{'background-color':'#17a2b8','color':'white', 'margin-right':'1.7rem'}">Create Credit Rule</button>
+</mat-dialog-actions>
