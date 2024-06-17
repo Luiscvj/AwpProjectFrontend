@@ -1,3 +1,4 @@
+
 .material-symbols-outlined {
     font-variation-settings:
     'FILL' 1,
@@ -7,9 +8,8 @@
   }
   
   
-  
   .image-container-user img{
       position: absolute;
-      left: 15px;
+      left: 10px;
       width: 50px;
   }
