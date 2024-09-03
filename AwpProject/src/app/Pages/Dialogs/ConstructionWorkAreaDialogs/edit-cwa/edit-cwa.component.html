@@ -1,0 +1,118 @@
+
+<h2 mat-dialog-title>Edit CWA</h2>
+<mat-dialog-content>
+    <form [formGroup]="editCwaForm">
+        <div class="row pb-4 row-cols-lg-3 row-cols-md-2 g-4 ">
+            <div class="col ">        
+                <mat-form-field style="width: 295px;">
+                    <mat-label>Enter a date</mat-label>
+                    <mat-date-range-input [rangePicker]="picker">
+                        <input formControlName="cwaStartDate" matStartDate [errorStateMatcher]="matcher" placeholder="Start date">
+                        <input formControlName="cwaFinishDate" matEndDate  [errorStateMatcher]="matcher" placeholder="End date" >
+                      </mat-date-range-input>
+                    <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-date-range-picker #picker></mat-date-range-picker>
+                    @if(editCwaForm.controls['cwaStartDate'].hasError('required') || editCwaForm.controls['cwaFinishDate'].hasError('required'))
+                    {
+                        <mat-error>Please  insert  a range  of date</mat-error>
+                    }
+                </mat-form-field>
+            </div>
+                <div class="col">
+                    <mat-form-field  >
+                        <mat-label>Planned value </mat-label>
+                        <input type="number" min="0" placeholder="200.021"   matInput formControlName="cwaPlannedValue" [errorStateMatcher]="matcher">
+                        @if(editCwaForm.controls['cwaPlannedValue'].hasError('required'))
+                        {
+                            <mat-error>Enter a planned value</mat-error>
+                        }
+                        @if(editCwaForm.controls['cwaPlannedValue'].hasError('maxDigit'))
+                        {
+                            <mat-error>Enter a number with no more than 15 digits</mat-error>
+                        }
+                    </mat-form-field>
+                </div> 
+                
+            <div class="col">
+                <mat-form-field>
+                    <mat-label>Planned Hours</mat-label>
+                    <input type="number" min="0" matInput formControlName="cwaPlannedHours" [errorStateMatcher]="matcher">
+                    @if(editCwaForm.controls['cwaPlannedHours'].hasError('required'))
+                    {
+                        <mat-error>Enter a planned hours</mat-error>
+                    }
+                    @if(editCwaForm.controls['cwaPlannedHours'].hasError('maxDigit'))
+                    {
+                        <mat-error>Enter a number with no more than 10 digits</mat-error>
+                    }
+
+                </mat-form-field>
+            </div>
+            <div class="col">
+                <mat-form-field>
+                    <mat-label>Sequence Number</mat-label>
+                    <input type="number" min="0" matInput formControlName="cwaSequenceNumber" [errorStateMatcher]="matcher">
+                    @if(editCwaForm.controls['cwaSequenceNumber'].hasError('required'))
+                    {
+                        <mat-error>Please insert a sequence number</mat-error>
+                    }
+                   @if(editCwaForm.controls['cwaSequenceNumber'].hasError('maxDigit') && !editCwaForm.controls['cwaSequenceNumber'].hasError('required'))
+                    {
+                        <mat-error>enter a sequence number with no more than three digits</mat-error>
+                    } 
+                    @if(editCwaForm.controls['cwaSequenceNumber'].hasError('pattern'))
+                    {
+                        <mat-error>please insert a valid number, no special characters</mat-error>
+                    }
+                </mat-form-field>
+            </div>
+            <div class="col">
+                <mat-form-field>
+                    <mat-label>Cwa area</mat-label>
+                    <input type="number" min="0"  matInput formControlName="area" placeholder="2033.32ft" [errorStateMatcher]="matcher">
+                    @if(editCwaForm.controls['area'].hasError('required'))
+                    {
+                        <mat-error>Enter an area</mat-error>
+                    }
+                    @if(editCwaForm.controls['area'].hasError('maxDigit'))
+                    {
+                        <mat-error>Enter an area with no more than 12 digits</mat-error>
+                    }
+                </mat-form-field>
+            </div>
+            <div class="col">
+                <mat-form-field>
+                    <mat-label>Worker area </mat-label>
+                    <input type="number" min="0" matInput formControlName="workerArea" [errorStateMatcher]="matcher">
+                    @if(editCwaForm.controls['workerArea'].hasError('maxDigit'))
+                    {
+                        <mat-error>Enter a number with no more than 5 digits</mat-error>
+                    }
+                </mat-form-field>
+            </div>
+       
+       
+            <div class="col mb-4">
+                <mat-form-field>
+                    <mat-label>Unit of measurement</mat-label>
+                    <mat-select type="number"  formControlName="unitOfMeasurementBySystemOfUnitId" [errorStateMatcher]="matcher" required> 
+                        <mat-option >--</mat-option>
+                        @for (unit of unitsOfMeasurement; track $index) 
+                        {
+                            <mat-option [value]="unit.unitOfMeasurementBySystemOfUnitId">{{unit.Abbreviation}}</mat-option>
+                        }
+                    </mat-select>
+                    @if(editCwaForm.controls['unitOfMeasurementBySystemOfUnitId'].hasError('required'))
+                    {
+                        <mat-error>Please choose a option</mat-error>
+                    }
+                </mat-form-field>
+            </div>
+        </div>  
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-raised-button  (click)="onNoClick()"  [style]="{'margin-right':'5px'}">Cancel</button>
+    <button  mat-raised-button color="warm"  [disabled]="editCwaForm.invalid" [mat-dialog-close]="editCwaForm.value"  [ngClass]="editCwaForm.invalid ?'editInvalidButton':'editValidButton'">Save changes </button>
+</mat-dialog-actions>

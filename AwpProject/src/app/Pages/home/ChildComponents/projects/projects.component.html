@@ -9,10 +9,9 @@
     <div class="card-body">
       <div class="row">
         @for (project of projectList; track $index) 
-        {
-          
+        {  
             <div class="col-sm-6 mt-2 " style="max-width: 300px; ">
-              <div class="card" style="height: 170px; position: relative;">
+              <div class="cardByProject" style="height: 170px; position: relative;">
                 <button  class="configProjectButton btn" [matMenuTriggerFor]="menu">
                   <span class="material-symbols-outlined"  style="display: flex;justify-content: center;">more_vert</span>
                 </button>
@@ -22,7 +21,7 @@
                 </mat-menu>
                 <div class="card-body">
                   <h5 class="card-title">{{project.projectCode}}</h5>
-                  <p class="card-text">Proyecto</p>
+                  <p class="card-text">Project</p>
                   <button mat-raised-button color="primary" (click)="goToOverallProject(project.projectId)">Overall</button>
                 </div>
               </div>

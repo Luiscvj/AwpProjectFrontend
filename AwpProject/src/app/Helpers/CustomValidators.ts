@@ -45,4 +45,19 @@ export class CustomValidators{
                 );  
         }
     }
+
+    static maxDigit(maxDigits: number):ValidatorFn
+    {
+        return (control:AbstractControl):{[key:string]:any}|null =>
+            {
+                const input = control.value;
+                if(input)
+                    {
+
+                        const isValid = input.toString().length <= maxDigits;
+                        return isValid ? null :{'maxDigit':{value: control.value}}
+                    }
+                return null
+            }
+    }
 }

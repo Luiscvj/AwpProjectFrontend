@@ -1,0 +1,12 @@
+.editInvalidButton
+{
+    background-color: rgb(184, 184, 184);
+    color: rgb(68, 67, 67) !important;
+}
+
+.editValidButton
+{
+  background-color: #17a2b8;
+  color: white;
+  margin-right: 1.7rem;
+}

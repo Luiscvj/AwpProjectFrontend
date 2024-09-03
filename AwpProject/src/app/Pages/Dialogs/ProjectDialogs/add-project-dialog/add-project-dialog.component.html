@@ -8,7 +8,19 @@
     <mat-form-field>
         <mat-label>Project value</mat-label>
         <input type="number" matInput placeholder="$0.00" [(ngModel)]="projectData.projectValue">
-    </mat-form-field>     
+    </mat-form-field> 
+    
+    <mat-form-field>
+        <mat-label >Project Categories</mat-label>
+        <mat-select [(ngModel)]="projectData.projectCategoryId">
+            <mat-option>None</mat-option>
+            @for(projectCategory of listProjectCategories; track $index)
+            {
+                <mat-option [value]="projectCategory.projectCategoryId">{{projectCategory.categoryName}}</mat-option>
+            }
+        </mat-select>
+
+    </mat-form-field>
 </mat-dialog-content>
 <mat-dialog-actions>
     <button mat-raised-button  (click)="onNoClick()"  [style]="{'margin-right':'5px'}">Cancel</button>

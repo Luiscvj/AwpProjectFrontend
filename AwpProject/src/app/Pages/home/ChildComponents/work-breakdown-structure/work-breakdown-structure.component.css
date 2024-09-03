@@ -1,0 +1,33 @@
+.matIconAddCWA
+{
+    width: 2rem !important;
+    height: 1.5rem !important;
+    background-color: #0d778c;
+    border-radius: 10px;
+}
+
+
+ 
+.cardCwa
+{
+    box-shadow: 0 5px 8px rgb(0,0,0,0.2);
+}
+
+.cardCwaByProject
+{
+    box-shadow: 4px 5px 10px rgb(0,0,0,0.2) ;
+}
+
+.configProjectButton
+{
+  position: absolute;
+  top: 10px;  /* Ajusta según necesidad para el margen superior */
+  left: 210px;
+  background-color: transparent;
+  color:#0d778c;
+  width: 30px;
+  border: none;
+  transition: background-color 0.3s, color 0.3s; 
+
+}
+

@@ -20,6 +20,8 @@
   min-width: 500px;
   margin-right: 10px;
   width: 100%;
+  box-shadow: 4px 5px 10px rgb(0,0,0,0.2);
+  
 }
 
 .configProjectButton
@@ -34,7 +36,10 @@
   transition: background-color 0.3s, color 0.3s; 
 
 }
-
+.cardByProject
+{
+  box-shadow: 4px 0 10px rgb(0,0,0,0.2); 
+}
 .configProjectButton:hover {
   background-color: #f0f0f0; /* Color de fondo al hacer hover */
   color: #0f0f10; /* Cambia el color del ícono/texto al hacer hover */

@@ -3,4 +3,5 @@
     min-width: 500px;
     margin-right: 10px;
     width: 100%;
+    box-shadow: 4px 5px 10px rgb(0,0,0,0.2) ;
 }

@@ -57,7 +57,6 @@ export class EditCreditRuleComponent implements OnInit{
               if(_disciplines.length > 0)
                 {
                   this.disciplines = _disciplines;
-
                 }
             }
         })

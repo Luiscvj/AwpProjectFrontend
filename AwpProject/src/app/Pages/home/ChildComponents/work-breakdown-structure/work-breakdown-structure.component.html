@@ -1,1 +1,51 @@
-<p>work-breakdown-structure works!</p>
+<div class="card cardCwaByProject" >
+    <div class="card-header">  
+      <div class="row">
+        <div class="col-4">
+          <h4>Construction Work Areas</h4>
+        </div>
+       <!--  <div class="col-4">
+            <h6>Nombre proyecto</h6>
+        </div> -->
+        <div class="col-4">
+          <button mat-raised-button class="text-center"  (click)="addConstructionWorkArea()" > Add CWA
+            <mat-icon aria-hidden="false" aria-label="add-cwa" class="matIconAddCWA">
+                <span class="material-symbols-outlined">add_circle</span>
+            </mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-body containerCard">
+
+        <div class="row row-cols-1 row-cols-lg-4  row-cols-md-3 row-cols-sm-2   g-3">
+            @for (cwa of constructionWorkAreas; track $index) 
+            {
+              <div class="col">
+                <div class="card  d-flex align-items-center cardCwa pe-3 pt-3 ps-3 " style="width: 240px;">
+                  <button  class="configProjectButton btn" [matMenuTriggerFor]="menu">
+                    <span class="material-symbols-outlined"  style="display: flex;justify-content: center;">more_vert</span>
+                  </button>
+                  <mat-menu #menu="matMenu">
+                    <button mat-menu-item (click)="editConstructionWorkArea(cwa)">Edit CWA</button>
+                    <button mat-menu-item  (click)="deleteConstructionWorkArea(cwa.constructionWorkAreaId)" style="color: red;">Delete Cwa</button>
+                  </mat-menu>
+                  <img src="../../../../../assets/Images/exampleCwa.png" style="width: 210px;border-radius: 12px" class="card-img-top p-2  cardImgCwa" alt="...">
+                  <div class="card-body">
+                    <h5 class="card-title">CWA-{{cwa.cwaCode}}</h5>
+                  </div>
+                </div>
+              </div>
+            }
+
+        </div>
+<!-- 
+  CREDIT RULES      
+-->
+<!-- ////////////////////////////// -->
+    </div>
+</div>
+
+
+

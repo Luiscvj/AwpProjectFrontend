@@ -33,17 +33,20 @@ import {MatMenuModule} from '@angular/material/menu';
 export class ProjectsComponent implements OnInit{
   userData: UserDto  = new   UserDto();
   projectList: ProjectDto[] = []
+  projectDto: ProjectDto = new ProjectDto();
   constructor(private _projectService: ProjectService,
      public dialog:MatDialog,
      public _authService:AuthService,
      private router:Router,
      private _homeHeaderService: HomeHeaderProjectService,
+
      private cdr: ChangeDetectorRef,
   ){}
 
 
  async  ngOnInit(): Promise<void> {
     const userInfo = await this._authService.getUserInfo();
+    
     if(userInfo)
       {
         this.userData = userInfo
@@ -52,15 +55,19 @@ export class ProjectsComponent implements OnInit{
         console.log("No user data avaliable");
       }
     this.uploadProjects(this.userData.Id);
+ 
+
     
 
   }
-  public projectDto: ProjectDto = new ProjectDto();
+ 
   
   
    openProjectDialog(): void {
+
         const dialogRef = this.dialog.open(AddProjectDialogComponent,{
-        data: {projectValue: this.projectDto.projectValue, projectCode: this.projectDto.projectCode,userId:this.userData.Id}
+        data: {projectValue: this.projectDto.projectValue, projectCode: this.projectDto.projectCode, projectCategoryId: this.projectDto.projectCategoryId ,userId:this.userData.Id},
+        
     
       });
 
@@ -69,13 +76,16 @@ export class ProjectsComponent implements OnInit{
             
             if(data)
               {
+                console.log(data);
                  
                 this._projectService.postProject(data).subscribe(
                   {
                     next:(data)=>
                       {
+                        console.log(data);
                         if(data)
                           {
+                           
                             this.uploadProjects(this.userData.Id);
 
                             alert("New project created successfully");

@@ -12,16 +12,20 @@ export class ProjectService {
    private apiUrl:string = appsettings.apiUrl + 'Project'
   constructor() { }
 
-  getListProjects(): Observable<ProjectDto[]>{
+  getListProjects(): Observable<ProjectDto[]>
+  {
     return this.http.get<ProjectDto[]>(`${this.apiUrl}/GetListProjects`);
   }
 
-  getProject(projectId:number): Observable<ProjectDto>{
+  getProject(projectId:number): Observable<ProjectDto>
+  {
     const params = new HttpParams().set('projectId',projectId)
     return this.http.get<ProjectDto>(`${this.apiUrl}`,{params});
   }
 
-  postProject(project:ProjectDto): Observable<any>{
+  postProject(project:ProjectDto): Observable<any>
+  {
+  
      return this.http.post<any>(`${this.apiUrl}`,project);
   }
 

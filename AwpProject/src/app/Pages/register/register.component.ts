@@ -74,11 +74,13 @@ export class RegisterComponent implements OnInit,OnDestroy{
       {
         next:(data)=>
           {
-            if(data.statusCode = 201){
+            console.log(data);
+            if(data.statusCode === 201){
               alert( `User created successfully, please confirm your email ${registerUserData.email}`);
               this.router.navigate(['/login']);
             }else{
-              console.log("An error was ocurred, please attempt later ")
+              alert("An error was ocurred, please attempt later");
+              
             }
 
           }

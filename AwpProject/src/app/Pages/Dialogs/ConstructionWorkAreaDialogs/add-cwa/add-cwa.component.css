@@ -1,0 +1,18 @@
+.createInvalidButton
+{
+    background-color: rgb(184, 184, 184);
+    color: rgb(68, 67, 67) !important;
+}
+
+.createValidButton
+{
+  background-color: #17a2b8;
+  color: white;
+  margin-right: 1.7rem;
+}
+
+mat-dialog-actions{
+  display: flex;
+  justify-content: flex-end;
+
+}

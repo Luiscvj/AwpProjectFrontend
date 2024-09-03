@@ -34,13 +34,14 @@
   
   .sidebar {
     grid-area: sidebar;
-    background-color: #57c305;
+   /*  background-color: #57c305; */
     padding: 20px;
+    border-right: 1px groove #ded9d9;
   }
   
   .content {
     grid-area: content;
-    background-color: #028fbe;
+    /* background-color: #028fbe; */
     padding: 20px;
   }
   .menuProject {

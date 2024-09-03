@@ -76,7 +76,6 @@ export class AuthService { //This class allows me to manage  the user informatio
     const tokenInfo =this.tokenUserSubject.value;
     if (tokenInfo)
       {
-        console.log(tokenInfo);
         sessionStorage.setItem('authToken',JSON.stringify(tokenInfo));
       }
  }
