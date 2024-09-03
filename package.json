@@ -2,6 +2,7 @@
   "dependencies": {
     "bootstrap": "^5.3.3",
     "echarts": "^5.5.1",
-    "echarts-gl": "^2.0.9"
+    "echarts-gl": "^2.0.9",
+    "ngx-echarts": "^18.0.0"
   }
 }
