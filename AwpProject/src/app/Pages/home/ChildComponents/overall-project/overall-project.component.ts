@@ -5,20 +5,42 @@ import { ButtonOffCanvas } from '../../../../Models/Shared/Buttons/ButtonOffCanv
 import { ProjectDto } from '../../../../Models/ProjectDTOS/ProjectDto';
 import { ProjectService } from '../../../../Services/Project/project.service';
 import { HomeHeaderProjectService } from '../../../../Services/Shared/HomeHeaderProject/home-header-project.service';
-
+import {NgxEchartsDirective, provideEcharts} from 'ngx-echarts';
+import { ProjectAnalysesService } from '../../../../Services/ProjectAnalyses/project-analyses.service';
+import { ProjectAnalysisEarnedActualHoursDto } from '../../../../Models/ProjectAnalysesDTOS/project-analysis-earned-actual-hours-dto';
+import { CommonModule } from '@angular/common';
+import { EChartsOption } from 'echarts';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { left } from '@popperjs/core';
 
 @Component({
   selector: 'app-overall-project',
   standalone: true,
-  imports: [],
+  imports: [
+    CommonModule,
+    NgxEchartsDirective
+  
+  ],
   templateUrl: './overall-project.component.html',
-  styleUrl: './overall-project.component.css'
+  styleUrl: './overall-project.component.css',
+  providers:[
+    provideEcharts(),
+  
+  ]
 })
 export class OverallProjectComponent implements OnInit, OnDestroy {
-  project:ProjectDto = new ProjectDto();
+  public  project:ProjectDto = new ProjectDto();
   public  buttonToActivate:ButtonOffCanvas[] = [];
-  constructor(private route: ActivatedRoute,private  _offcanvasProjectService:OffcanvasProjectService, private _projectService:ProjectService, public _router:Router, private _homeHeaderProjectService: HomeHeaderProjectService)
+  private  projectAnalysesRecords: BehaviorSubject<ProjectAnalysisEarnedActualHoursDto[]> = new BehaviorSubject<ProjectAnalysisEarnedActualHoursDto[]>([]);
+  public  _chartOption: EChartsOption = {};
+  constructor(
+    private route: ActivatedRoute,
+    private  _offcanvasProjectService:OffcanvasProjectService,
+    public _router:Router, 
+    private _homeHeaderProjectService: HomeHeaderProjectService,
+    private _projectAnalysesService:ProjectAnalysesService)
   {}
+
 
 
   ngOnInit(): void {
@@ -41,7 +63,71 @@ export class OverallProjectComponent implements OnInit, OnDestroy {
       ]
     
     this._offcanvasProjectService.updateButtons(this.buttonToActivate);
+
+    if(this.project)
+      {
+        this._projectAnalysesService.GetGeneralProjectAnalysis(this.project.projectId).subscribe(
+          {
+            next:(data)=>
+              {
+               this.projectAnalysesRecords.next(data);  
+              }
+          })
+          this.showData();
+      }
+
   }
+
+
+  showData():void
+  {  
+    let dataDates: string[] = [];
+    let dataValueEarnedHours: number[] = [];
+    let dataValueActualHours: number[] = [];
+    this.projectAnalysesRecords.subscribe(
+      {
+        next:(data:ProjectAnalysisEarnedActualHoursDto[])=>
+          {
+            
+            data.forEach(record =>
+              {       
+                 dataDates.push(record.projectAnalysisDate.toString().split('T')[0]);
+                 dataValueActualHours.push(record.projectAnalysisActualHours);
+                 dataValueEarnedHours.push(record.projectAnalysisEarnedHours);
+              })
+              this._chartOption = 
+              {
+                legend:
+                {
+                  data:['ActualHours','EarnedHours'],
+                  align:left
+                },
+                xAxis: {
+                  type: 'category',
+                  data: dataDates,
+                },
+                yAxis: {
+                  type: 'value',
+                },
+                series: [
+                  {
+                    name:'ActualHours',
+                    data: dataValueActualHours,
+                    type: 'line',
+                  },
+                  {
+                    name: 'EarnedHours',
+                    data: dataValueEarnedHours,
+                    type: 'line'
+                  }
+                ],
+
+              }
+          }
+      }) 
+        console.log(dataDates, '\n', dataValueActualHours, '\n',dataValueEarnedHours);
+  }
+
 
   ngOnDestroy(): void 
   {

@@ -18,6 +18,7 @@ import { Router } from '@angular/router';
 import { HomeHeaderProjectService } from '../../../../Services/Shared/HomeHeaderProject/home-header-project.service';
 import { EditprojectDialogComponent } from '../../../Dialogs/ProjectDialogs/editproject-dialog/editproject-dialog.component';
 import {MatMenuModule} from '@angular/material/menu';
+
 @Component({
   selector: 'app-projects',
   standalone: true,
@@ -26,9 +27,11 @@ import {MatMenuModule} from '@angular/material/menu';
             MatFormFieldModule,
             FormsModule,
             MatInputModule,
-            MatMenuModule],
+            MatMenuModule
+            ],
   templateUrl: './projects.component.html',
-  styleUrl: './projects.component.css'
+  styleUrl: './projects.component.css',
+ 
 })
 export class ProjectsComponent implements OnInit{
   userData: UserDto  = new   UserDto();
